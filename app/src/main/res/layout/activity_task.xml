@@ -58,6 +58,7 @@
                         android:layout_height="40dp"
                         android:layout_margin="10dp"
                         android:background="@drawable/edittext"
+                        android:hint="Informe o título da tarefa..."
                         android:padding="10dp" />
 
                 </LinearLayout>
@@ -92,6 +93,7 @@
                         android:layout_margin="10dp"
                         android:background="@drawable/edittext"
                         android:gravity="top"
+                        android:hint="Informe uma descrição para sua tarefa..."
                         android:padding="10dp" />
 
                 </LinearLayout>
