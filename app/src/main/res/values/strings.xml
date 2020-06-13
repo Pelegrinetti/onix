@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Ônix</string>
+    <string name="count_tasks">Tarefas:</string>
+    <string name="count_completed">Finalizadas:</string>
+    <string name="calendar">Calendário:</string>
+    <string name="create">Criar</string>
+    <string name="title_activity_create_task">CreateTask</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Hello Square World!</string>
+</resources>
