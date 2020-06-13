@@ -23,7 +23,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:text="Criar nova tarefa:"
+                android:text="@string/create_new_task"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="25sp"
                 android:textStyle="bold"
@@ -47,7 +47,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
-                        android:text="Título:"
+                        android:text="@string/task_title"
                         android:textAlignment="center"
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="20sp"
@@ -58,7 +58,7 @@
                         android:layout_height="40dp"
                         android:layout_margin="10dp"
                         android:background="@drawable/edittext"
-                        android:hint="Informe o título da tarefa..."
+                        android:hint="@string/enter_task_title"
                         android:padding="10dp" />
 
                 </LinearLayout>
@@ -81,7 +81,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
-                        android:text="Descrição:"
+                        android:text="@string/task_description"
                         android:textAlignment="center"
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="20sp"
@@ -93,7 +93,7 @@
                         android:layout_margin="10dp"
                         android:background="@drawable/edittext"
                         android:gravity="top"
-                        android:hint="Informe uma descrição para sua tarefa..."
+                        android:hint="@string/enter_task_description"
                         android:padding="10dp" />
 
                 </LinearLayout>
@@ -116,7 +116,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
-                        android:text="Horário:"
+                        android:text="@string/task_time"
                         android:textAlignment="center"
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="20sp"
@@ -148,7 +148,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:background="@drawable/button"
-                        android:text="Salvar"
+                        android:text="@string/task_save"
                         android:textColor="@android:color/white" />
                 </LinearLayout>
 
