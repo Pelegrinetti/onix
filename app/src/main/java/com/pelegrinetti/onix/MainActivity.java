@@ -56,6 +56,10 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayList<Task> tasks = db.listTask();
 
+        if (tasks.size() > 0) {
+            findViewById(R.id.no_tasks).setVisibility(View.GONE);
+        }
+
         counterTasks.setText(Integer.toString(tasks.size()));
 
         return tasks;
