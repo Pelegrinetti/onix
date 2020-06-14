@@ -54,6 +54,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), TaskActivity.class);
+                Bundle bundle = new Bundle();
+
+                bundle.putString("date", pickedDate);
+
+                intent.putExtras(bundle);
 
                 startActivityForResult(intent, 0);
             }
