@@ -1,5 +1,6 @@
 package com.pelegrinetti.onix;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -8,17 +9,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.CalendarView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.pelegrinetti.onix.database.DB;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     ArrayList<Task> tasks;
     FloatingActionButton createTask;
+    CalendarView calendar;
+    String pickedDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +33,11 @@ public class MainActivity extends AppCompatActivity {
 
         loadWidgets();
 
+        long actualDate = calendar.getDate();
+
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        pickedDate = formatter.format(actualDate);
+
         setEvents();
 
         createTaskList();
@@ -35,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void loadWidgets() {
         createTask = (FloatingActionButton) findViewById(R.id.create_task);
+        calendar = (CalendarView) findViewById(R.id.calendar);
     }
 
     public void setEvents() {
@@ -43,7 +54,26 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), TaskActivity.class);
+
                 startActivityForResult(intent, 0);
+            }
+        });
+
+        calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
+                String parsedYear, parsedMonth, parsedDayOfMonth;
+
+                parsedYear = String.valueOf(year);
+                parsedMonth = String.valueOf(month + 1);
+                parsedDayOfMonth = String.valueOf(dayOfMonth);
+
+                pickedDate = parsedYear +
+                        "-" +
+                        (month <= 9 ? "0" + parsedMonth : parsedMonth) +
+                        "-" +
+                        (dayOfMonth <= 9 ? "0" + parsedDayOfMonth : parsedDayOfMonth) +
+                        " 00:00:00";
             }
         });
     }
@@ -70,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
 
         tasks = loadTasks();
 
-        for (Task task: tasks) {
+        for (Task task : tasks) {
             LinearLayout taskItems = new LinearLayout(findViewById(R.id.main_linear).getContext());
             taskItems.setOrientation(LinearLayout.HORIZONTAL);
             taskItems.setLayoutParams(
