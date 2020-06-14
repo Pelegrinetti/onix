@@ -17,4 +17,6 @@
     <string name="enter_task_description">Informe uma descrição para sua tarefa...</string>
     <string name="task_time">Horário:</string>
     <string name="task_save">Salvar</string>
+    <string name="tasks">Tarefas:</string>
+    <string name="no_tasks">Ainda não há tarefas cadastradas...</string>
 </resources>
