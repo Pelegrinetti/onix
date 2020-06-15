@@ -58,6 +58,8 @@
                         android:layout_margin="10dp"
                         android:background="@drawable/edittext"
                         android:hint="@string/enter_task_title"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
                         android:padding="10dp" />
 
                 </LinearLayout>
@@ -92,6 +94,8 @@
                         android:layout_height="200dp"
                         android:layout_margin="10dp"
                         android:background="@drawable/edittext"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
                         android:gravity="top"
                         android:hint="@string/enter_task_description"
                         android:padding="10dp" />
