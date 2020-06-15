@@ -2,14 +2,17 @@ package com.pelegrinetti.onix;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.animation.Animator;
 import android.app.TimePickerDialog;
 import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TimePicker;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.pelegrinetti.onix.database.DB;
 
 import java.util.Objects;
@@ -19,6 +22,8 @@ public class TaskActivity extends AppCompatActivity {
     String pickedTime;
     EditText txtTaskTitle, txtTaskDescription;
     Bundle bundle;
+    LottieAnimationView successAnimation;
+    RelativeLayout animationContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +42,8 @@ public class TaskActivity extends AppCompatActivity {
         btnSaveTask = (Button) findViewById(R.id.task_save);
         txtTaskTitle = (EditText) findViewById(R.id.task_title);
         txtTaskDescription = (EditText) findViewById(R.id.task_description);
+        successAnimation = (LottieAnimationView) findViewById(R.id.success_animation);
+        animationContainer = (RelativeLayout) findViewById(R.id.animation_background);
         bundle = getIntent().getExtras();
     }
 
@@ -81,8 +88,32 @@ public class TaskActivity extends AppCompatActivity {
                         pickedTime
                 ));
 
-                setResult(RESULT_OK, null);
-                finish();
+                animationContainer.setVisibility(View.VISIBLE);
+
+                successAnimation.playAnimation();
+
+                successAnimation.addAnimatorListener(new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+                        // nothing for now
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        setResult(RESULT_OK, null);
+                        finish();
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animation) {
+                        // nothing for now
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animation) {
+                        // nothing for now
+                    }
+                });
             }
         });
     }
