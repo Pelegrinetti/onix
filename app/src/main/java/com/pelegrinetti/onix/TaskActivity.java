@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TimePicker;
 
+import com.pelegrinetti.onix.database.DB;
+
 import java.util.Objects;
 
 public class TaskActivity extends AppCompatActivity {
@@ -18,11 +20,12 @@ public class TaskActivity extends AppCompatActivity {
     EditText txtTaskTitle, txtTaskDescription;
     Bundle bundle;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task);
+
+        pickedTime = Objects.requireNonNull(getIntent().getExtras()).getString("date");
 
         loadWidgets();
 
@@ -63,6 +66,23 @@ public class TaskActivity extends AppCompatActivity {
                 }, hour, minute, true);
 
                 timePickerDialog.show();
+            }
+        });
+
+        btnSaveTask.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DB db = new DB(TaskActivity.this);
+
+                db.createTask(new Task(
+                        txtTaskTitle.getText().toString(),
+                        txtTaskDescription.getText().toString(),
+                        null,
+                        pickedTime
+                ));
+
+                setResult(RESULT_OK, null);
+                finish();
             }
         });
     }
