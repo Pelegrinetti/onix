@@ -53,8 +53,10 @@ public class DB extends SQLiteOpenHelper {
         db.close();
     }
 
-    public ArrayList<Task> listTask() {
+    public ArrayList<Task> listTask(String date) {
         SQLiteDatabase db = this.getReadableDatabase();
+
+        String[] dateHour = date.split(" ");
 
         String[] projection = {
                 TaskContract.TaskEntry.COLUMN_NAME_ID,
@@ -63,9 +65,12 @@ public class DB extends SQLiteOpenHelper {
                 TaskContract.TaskEntry.COLUMN_NAME_TIME
         };
 
+        String selection = TaskContract.TaskEntry.COLUMN_NAME_TIME + " BETWEEN ? AND ?";
+        String[] selectionArgs = { dateHour[0] + " 00:00:00", dateHour[0] + " 23:59:59" };
+
         String sortOrder = TaskContract.TaskEntry.COLUMN_NAME_CREATE_AT + " ASC";
 
-        Cursor cursor = db.query(TaskContract.TaskEntry.TABLE_NAME, projection, null, null, null, null, sortOrder);
+        Cursor cursor = db.query(TaskContract.TaskEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
 
         ArrayList<Task> items = new ArrayList<>();
 

@@ -80,31 +80,30 @@ public class MainActivity extends AppCompatActivity {
                         "-" +
                         (dayOfMonth <= 9 ? "0" + parsedDayOfMonth : parsedDayOfMonth) +
                         " 00:00:00";
+
+                createTaskList();
             }
         });
     }
 
     @SuppressLint("SetTextI18n")
-    private ArrayList<Task> loadTasks() {
-        DB db = new DB(MainActivity.this);
-
+    public void createTaskList() {
+        LinearLayout tasksContainer = (LinearLayout) findViewById(R.id.tasks_container);
         TextView counterTasks = (TextView) findViewById(R.id.count_tasks);
 
-        ArrayList<Task> tasks = db.listTask();
+        tasksContainer.removeAllViews();
+
+        DB db = new DB(MainActivity.this);
+
+        tasks = db.listTask(pickedDate);
 
         if (tasks.size() > 0) {
             findViewById(R.id.no_tasks).setVisibility(View.GONE);
+        } else {
+            findViewById(R.id.no_tasks).setVisibility(View.VISIBLE);
         }
 
         counterTasks.setText(Integer.toString(tasks.size()));
-
-        return tasks;
-    }
-
-    public void createTaskList() {
-        LinearLayout tasksContainer = (LinearLayout) findViewById(R.id.tasks_container);
-
-        tasks = loadTasks();
 
         for (Task task : tasks) {
             LinearLayout taskItems = new LinearLayout(findViewById(R.id.main_linear).getContext());
