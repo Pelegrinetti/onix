@@ -1,6 +1,7 @@
 package com.pelegrinetti.onix;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -134,6 +135,19 @@ public class MainActivity extends AppCompatActivity {
 
             cardTitle = (TextView) itemView.findViewById(R.id.card_list_title);
             cardDescription = (TextView) itemView.findViewById(R.id.card_list_description);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK) {
+            Intent refresh = new Intent(this, MainActivity.class);
+
+            startActivity(refresh);
+
+            this.finish();
         }
     }
 }
