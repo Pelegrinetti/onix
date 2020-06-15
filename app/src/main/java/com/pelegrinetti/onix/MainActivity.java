@@ -117,8 +117,15 @@ public class MainActivity extends AppCompatActivity {
 
             ViewHolder holder = new ViewHolder(cardView);
 
+            String dateTime = task.getTime();
+
+            String[] splitDateTime = dateTime.split(" ");
+
+            String[] time = splitDateTime[1].split(":");
+
             holder.cardTitle.setText(task.getTitle());
             holder.cardDescription.setText(task.getDescription());
+            holder.cardTime.setText(time[0] + ":" + time[1]);
 
             taskItems.addView(cardView);
             tasksContainer.addView(taskItems);
@@ -128,12 +135,14 @@ public class MainActivity extends AppCompatActivity {
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView cardTitle;
         public TextView cardDescription;
+        public TextView cardTime;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
             cardTitle = (TextView) itemView.findViewById(R.id.card_list_title);
             cardDescription = (TextView) itemView.findViewById(R.id.card_list_description);
+            cardTime = (TextView) itemView.findViewById(R.id.card_list_time);
         }
     }
 
