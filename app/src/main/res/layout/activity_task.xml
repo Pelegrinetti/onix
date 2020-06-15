@@ -20,7 +20,6 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -53,6 +52,7 @@
                         android:textStyle="bold" />
 
                     <EditText
+                        android:id="@+id/task_title"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_margin="10dp"
@@ -87,6 +87,7 @@
                         android:textStyle="bold" />
 
                     <EditText
+                        android:id="@+id/task_description"
                         android:layout_width="match_parent"
                         android:layout_height="200dp"
                         android:layout_margin="10dp"
@@ -121,10 +122,14 @@
                         android:textSize="20sp"
                         android:textStyle="bold" />
 
-                    <TimePicker
+                    <Button
+                        android:id="@+id/task_time"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp" />
+                        android:layout_margin="10dp"
+                        android:background="@drawable/button"
+                        android:text="@string/select"
+                        android:textColor="@android:color/white" />
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -142,6 +147,7 @@
                     android:orientation="vertical">
 
                     <Button
+                        android:id="@+id/task_save"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"

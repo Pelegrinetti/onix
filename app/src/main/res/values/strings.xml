@@ -19,4 +19,5 @@
     <string name="task_save">Salvar</string>
     <string name="tasks">Tarefas:</string>
     <string name="no_tasks">Ainda não há tarefas cadastradas...</string>
+    <string name="select">Selecione</string>
 </resources>
