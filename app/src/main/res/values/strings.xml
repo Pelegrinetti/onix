@@ -5,10 +5,6 @@
     <string name="calendar">Calendário:</string>
     <string name="create">Criar</string>
     <string name="title_activity_create_task">CreateTask</string>
-    <!--
-    This string is used for square devices and overridden by hello_world in
-    values-round/strings.xml for round devices.
-    -->
     <string name="hello_world">Hello Square World!</string>
     <string name="create_new_task">Criar nova tarefa:</string>
     <string name="task_title">Título:</string>
@@ -25,5 +21,5 @@
     <string name="finish">Finalizar</string>
     <string name="delete">Deletar</string>
     <string name="to">Para:</string>
-    <string name="created_at">Criado em:</string>
+    <string name="created_at">Criado:</string>
 </resources>
