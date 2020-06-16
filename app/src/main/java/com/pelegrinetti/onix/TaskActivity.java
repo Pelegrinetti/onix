@@ -85,7 +85,8 @@ public class TaskActivity extends AppCompatActivity {
                         txtTaskTitle.getText().toString(),
                         txtTaskDescription.getText().toString(),
                         null,
-                        pickedTime
+                        pickedTime,
+                        false
                 ));
 
                 animationContainer.setVisibility(View.VISIBLE);

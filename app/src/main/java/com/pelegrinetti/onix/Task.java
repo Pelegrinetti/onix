@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 public class Task {
     private int id;
     private String title, description, createdAt, time;
+    private boolean finished;
 
     @NonNull
     @Override
@@ -18,11 +19,16 @@ public class Task {
                 '}';
     }
 
-    public Task(String title, String description, String createdAt, String time) {
+    public Task(String title, String description, String createdAt, String time, boolean finished) {
         this.title = title;
         this.description = description;
         this.createdAt = createdAt;
         this.time = time;
+        this.finished = finished;
+    }
+
+    public boolean isFinished() {
+        return finished;
     }
 
     public void setId(int id) {

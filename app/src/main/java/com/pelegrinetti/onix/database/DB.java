@@ -18,6 +18,7 @@ public class DB extends SQLiteOpenHelper {
                     TaskContract.TaskEntry.COLUMN_NAME_TITLE + " TEXT, " +
                     TaskContract.TaskEntry.COLUMN_NAME_DESCRIPTION + " TEXT, " +
                     TaskContract.TaskEntry.COLUMN_NAME_TIME + " DATETIME, " +
+                    TaskContract.TaskEntry.COLUMN_NAME_FINISHED + " INTEGER DEFAULT 0, " +
                     TaskContract.TaskEntry.COLUMN_NAME_CREATE_AT + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP);";
     private static final String SQL_DELETE_ENTRIES =
             "DROP TABLE IF EXISTS " + TaskContract.TaskEntry.TABLE_NAME + ";";
@@ -60,7 +61,8 @@ public class DB extends SQLiteOpenHelper {
                 TaskContract.TaskEntry.COLUMN_NAME_TITLE,
                 TaskContract.TaskEntry.COLUMN_NAME_DESCRIPTION,
                 TaskContract.TaskEntry.COLUMN_NAME_TIME,
-                TaskContract.TaskEntry.COLUMN_NAME_CREATE_AT
+                TaskContract.TaskEntry.COLUMN_NAME_CREATE_AT,
+                TaskContract.TaskEntry.COLUMN_NAME_FINISHED
         };
 
         String selection = TaskContract.TaskEntry.COLUMN_NAME_ID + " = ?";
@@ -94,7 +96,11 @@ public class DB extends SQLiteOpenHelper {
                 cursor.getColumnIndexOrThrow(TaskContract.TaskEntry.COLUMN_NAME_CREATE_AT)
         );
 
-        Task task = new Task(itemTitle, itemDescription, itemCreatedAt, itemTime);
+        boolean itemFinished = cursor.getInt(
+                cursor.getColumnIndexOrThrow(TaskContract.TaskEntry.COLUMN_NAME_FINISHED)
+        ) > 0;
+
+        Task task = new Task(itemTitle, itemDescription, itemCreatedAt, itemTime, itemFinished);
         task.setId(itemId);
 
         return task;
@@ -109,7 +115,8 @@ public class DB extends SQLiteOpenHelper {
                 TaskContract.TaskEntry.COLUMN_NAME_ID,
                 TaskContract.TaskEntry.COLUMN_NAME_TITLE,
                 TaskContract.TaskEntry.COLUMN_NAME_DESCRIPTION,
-                TaskContract.TaskEntry.COLUMN_NAME_TIME
+                TaskContract.TaskEntry.COLUMN_NAME_TIME,
+                TaskContract.TaskEntry.COLUMN_NAME_FINISHED
         };
 
         String selection = TaskContract.TaskEntry.COLUMN_NAME_TIME + " BETWEEN ? AND ?";
@@ -135,7 +142,11 @@ public class DB extends SQLiteOpenHelper {
                     cursor.getColumnIndexOrThrow(TaskContract.TaskEntry.COLUMN_NAME_TIME)
             );
 
-            Task task = new Task(itemTitle, itemDescription, null, itemTime);
+            boolean itemFinished = cursor.getInt(
+                    cursor.getColumnIndexOrThrow(TaskContract.TaskEntry.COLUMN_NAME_FINISHED)
+            ) > 0;
+
+            Task task = new Task(itemTitle, itemDescription, null, itemTime, itemFinished);
 
             task.setId(itemId);
 
