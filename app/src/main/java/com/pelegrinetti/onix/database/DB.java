@@ -10,7 +10,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.pelegrinetti.onix.Task;
 
 import java.util.ArrayList;
-import java.util.zip.Inflater;
 
 public class DB extends SQLiteOpenHelper {
     private static final String SQL_CREATE_ENTRIES =
