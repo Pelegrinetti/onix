@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CalendarView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -91,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
     public void createTaskList() {
         LinearLayout tasksContainer = (LinearLayout) findViewById(R.id.tasks_container);
         TextView counterTasks = (TextView) findViewById(R.id.count_tasks);
+        TextView counterFinished = (TextView) findViewById(R.id.cound_completed);
 
         tasksContainer.removeAllViews();
 
@@ -105,6 +107,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         counterTasks.setText(Integer.toString(tasks.size()));
+
+        int countFinished = 0;
 
         for (Task task : tasks) {
             LinearLayout taskItems = new LinearLayout(findViewById(R.id.main_linear).getContext());
@@ -131,9 +135,16 @@ public class MainActivity extends AppCompatActivity {
             holder.cardDescription.setText(task.getDescription());
             holder.cardTime.setText(time[0] + ":" + time[1]);
 
+            if (task.isFinished()) {
+                countFinished++;
+                holder.cardFinished.setVisibility(View.VISIBLE);
+            }
+
             taskItems.addView(cardView);
             tasksContainer.addView(taskItems);
         }
+
+        counterFinished.setText(String.valueOf(countFinished));
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -141,6 +152,7 @@ public class MainActivity extends AppCompatActivity {
         public TextView cardTitle;
         public TextView cardDescription;
         public TextView cardTime;
+        public ImageView cardFinished;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -162,6 +174,7 @@ public class MainActivity extends AppCompatActivity {
             cardTitle = (TextView) itemView.findViewById(R.id.card_list_title);
             cardDescription = (TextView) itemView.findViewById(R.id.card_list_description);
             cardTime = (TextView) itemView.findViewById(R.id.card_list_time);
+            cardFinished = (ImageView) itemView.findViewById(R.id.completed_effect);
         }
     }
 
