@@ -69,6 +69,11 @@ public class ReadTaskActivity extends AppCompatActivity {
         tvTaskCreatedAt.setText(getResources().getString(R.string.created_at) + " " + formatter.format(createdAt));
         assert forDate != null;
         tvTaskTime.setText(getResources().getString(R.string.to) + " " + formatter.format(forDate));
+
+        if (task.isFinished()) {
+            btnFinishTask.setEnabled(false);
+            btnFinishTask.setBackground(getResources().getDrawable(R.drawable.button_disabled));
+        }
     }
 
     private void setEvents() {
@@ -100,6 +105,16 @@ public class ReadTaskActivity extends AppCompatActivity {
                 });
 
                 builder.show();
+            }
+        });
+
+        btnFinishTask.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (db.setFinishedTask(taskId, true)) {
+                    setResult(RESULT_OK);
+                    finish();
+                }
             }
         });
     }
