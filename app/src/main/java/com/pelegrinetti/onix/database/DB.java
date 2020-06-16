@@ -147,4 +147,13 @@ public class DB extends SQLiteOpenHelper {
 
         return items;
     }
+
+    public boolean deleteTask (int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String selection = TaskContract.TaskEntry.COLUMN_NAME_ID + " = ?";
+        String[] selectionArgs = { String.valueOf(id) };
+
+        return db.delete(TaskContract.TaskEntry.TABLE_NAME, selection, selectionArgs) > 0;
+    }
 }

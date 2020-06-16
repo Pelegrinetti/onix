@@ -22,4 +22,6 @@
     <string name="delete">Deletar</string>
     <string name="to">Para:</string>
     <string name="created_at">Criado:</string>
+    <string name="yes">Sim</string>
+    <string name="no">Não</string>
 </resources>
