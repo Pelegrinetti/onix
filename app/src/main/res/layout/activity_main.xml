@@ -131,7 +131,7 @@
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/cound_completed"
+                            android:id="@+id/count_completed"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center_vertical|center"

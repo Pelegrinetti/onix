@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
     public void createTaskList() {
         LinearLayout tasksContainer = (LinearLayout) findViewById(R.id.tasks_container);
         TextView counterTasks = (TextView) findViewById(R.id.count_tasks);
-        TextView counterFinished = (TextView) findViewById(R.id.cound_completed);
+        TextView counterFinished = (TextView) findViewById(R.id.count_completed);
 
         tasksContainer.removeAllViews();
 
