@@ -167,4 +167,16 @@ public class DB extends SQLiteOpenHelper {
 
         return db.delete(TaskContract.TaskEntry.TABLE_NAME, selection, selectionArgs) > 0;
     }
+
+    public boolean setFinishedTask (int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(TaskContract.TaskEntry.COLUMN_NAME_FINISHED, true);
+
+        String selection = TaskContract.TaskEntry.COLUMN_NAME_ID + " = ?";
+        String[] selectionArgs = { String.valueOf(id) };
+
+        return db.update(TaskContract.TaskEntry.TABLE_NAME, cv, selection, selectionArgs) > 0;
+    }
 }
