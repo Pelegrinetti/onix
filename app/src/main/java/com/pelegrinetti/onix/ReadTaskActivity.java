@@ -52,7 +52,7 @@ public class ReadTaskActivity extends AppCompatActivity {
         Task task = db.readTask(taskId);
 
         @SuppressLint("SimpleDateFormat") SimpleDateFormat defaultFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
         Date createdAt = defaultFormat.parse(task.getCreatedAt());
         Date forDate = defaultFormat.parse(task.getTime());
