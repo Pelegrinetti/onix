@@ -3,7 +3,7 @@ package com.pelegrinetti.onix;
 import androidx.annotation.NonNull;
 
 public class Task {
-    private Integer id;
+    private int id;
     private String title, description, createdAt, time;
 
     @NonNull
@@ -25,11 +25,11 @@ public class Task {
         this.time = time;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 

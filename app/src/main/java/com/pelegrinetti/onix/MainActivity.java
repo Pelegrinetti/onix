@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CalendarView;
@@ -123,6 +124,9 @@ public class MainActivity extends AppCompatActivity {
 
             String[] time = splitDateTime[1].split(":");
 
+            Log.i("**TASK***", task.toString());
+
+            holder.id = task.getId();
             holder.cardTitle.setText(task.getTitle());
             holder.cardDescription.setText(task.getDescription());
             holder.cardTime.setText(time[0] + ":" + time[1]);
@@ -132,13 +136,28 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        public int id;
         public TextView cardTitle;
         public TextView cardDescription;
         public TextView cardTime;
 
         public ViewHolder(View itemView) {
             super(itemView);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(v.getContext(), ReadTaskActivity.class);
+                    Bundle bundle = new Bundle();
+
+                    bundle.putInt("taskId", id);
+
+                    intent.putExtras(bundle);
+
+                    startActivityForResult(intent, 0);
+                }
+            });
 
             cardTitle = (TextView) itemView.findViewById(R.id.card_list_title);
             cardDescription = (TextView) itemView.findViewById(R.id.card_list_description);

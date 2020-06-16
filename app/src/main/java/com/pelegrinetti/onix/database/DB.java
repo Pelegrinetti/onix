@@ -1,5 +1,6 @@
 package com.pelegrinetti.onix.database;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -8,9 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.pelegrinetti.onix.Task;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 
 public class DB extends SQLiteOpenHelper {
     private static final String SQL_CREATE_ENTRIES =
@@ -53,6 +52,54 @@ public class DB extends SQLiteOpenHelper {
         db.close();
     }
 
+    public Task readTask(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String[] projection = {
+                TaskContract.TaskEntry.COLUMN_NAME_ID,
+                TaskContract.TaskEntry.COLUMN_NAME_TITLE,
+                TaskContract.TaskEntry.COLUMN_NAME_DESCRIPTION,
+                TaskContract.TaskEntry.COLUMN_NAME_TIME,
+                TaskContract.TaskEntry.COLUMN_NAME_CREATE_AT
+        };
+
+        String selection = TaskContract.TaskEntry.COLUMN_NAME_ID + " = ?";
+
+        String[] selectionArgs = {String.valueOf(id)};
+
+        @SuppressLint("Recycle") Cursor cursor = db.query(
+                TaskContract.TaskEntry.TABLE_NAME,
+                projection,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null,
+                null
+        );
+
+        cursor.moveToFirst();
+
+        int itemId = cursor.getColumnIndexOrThrow(TaskContract.TaskEntry.COLUMN_NAME_ID);
+        String itemTitle = cursor.getString(
+                cursor.getColumnIndexOrThrow(TaskContract.TaskEntry.COLUMN_NAME_TITLE)
+        );
+        String itemDescription = cursor.getString(
+                cursor.getColumnIndexOrThrow(TaskContract.TaskEntry.COLUMN_NAME_DESCRIPTION)
+        );
+        String itemTime = cursor.getString(
+                cursor.getColumnIndexOrThrow(TaskContract.TaskEntry.COLUMN_NAME_TIME)
+        );
+        String itemCreatedAt = cursor.getString(
+                cursor.getColumnIndexOrThrow(TaskContract.TaskEntry.COLUMN_NAME_CREATE_AT)
+        );
+
+        Task task = new Task(itemTitle, itemDescription, itemCreatedAt, itemTime);
+        task.setId(itemId);
+
+        return task;
+    }
+
     public ArrayList<Task> listTask(String date) {
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -66,7 +113,7 @@ public class DB extends SQLiteOpenHelper {
         };
 
         String selection = TaskContract.TaskEntry.COLUMN_NAME_TIME + " BETWEEN ? AND ?";
-        String[] selectionArgs = { dateHour[0] + " 00:00:00", dateHour[0] + " 23:59:59" };
+        String[] selectionArgs = {dateHour[0] + " 00:00:00", dateHour[0] + " 23:59:59"};
 
         String sortOrder = TaskContract.TaskEntry.COLUMN_NAME_CREATE_AT + " ASC";
 
@@ -74,8 +121,8 @@ public class DB extends SQLiteOpenHelper {
 
         ArrayList<Task> items = new ArrayList<>();
 
-        while(cursor.moveToNext()) {
-            long itemId = cursor.getLong(
+        while (cursor.moveToNext()) {
+            int itemId = cursor.getInt(
                     cursor.getColumnIndexOrThrow(TaskContract.TaskEntry.COLUMN_NAME_ID)
             );
             String itemTitle = cursor.getString(
@@ -88,7 +135,11 @@ public class DB extends SQLiteOpenHelper {
                     cursor.getColumnIndexOrThrow(TaskContract.TaskEntry.COLUMN_NAME_TIME)
             );
 
-            items.add(new Task(itemTitle, itemDescription, null, itemTime));
+            Task task = new Task(itemTitle, itemDescription, null, itemTime);
+
+            task.setId(itemId);
+
+            items.add(task);
         }
 
         cursor.close();

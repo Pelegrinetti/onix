@@ -20,4 +20,10 @@
     <string name="tasks">Tarefas:</string>
     <string name="no_tasks">Ainda não há tarefas cadastradas...</string>
     <string name="select">Selecione</string>
+    <string name="task">Tarefa:</string>
+    <string name="options">Opções:</string>
+    <string name="finish">Finalizar</string>
+    <string name="delete">Deletar</string>
+    <string name="to">Para:</string>
+    <string name="created_at">Criado em:</string>
 </resources>
