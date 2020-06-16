@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.pelegrinetti.onix.Task;
 
 import java.util.ArrayList;
+import java.util.zip.Inflater;
 
 public class DB extends SQLiteOpenHelper {
     private static final String SQL_CREATE_ENTRIES =
@@ -168,11 +169,11 @@ public class DB extends SQLiteOpenHelper {
         return db.delete(TaskContract.TaskEntry.TABLE_NAME, selection, selectionArgs) > 0;
     }
 
-    public boolean setFinishedTask (int id) {
+    public boolean setFinishedTask (int id, boolean status) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
-        cv.put(TaskContract.TaskEntry.COLUMN_NAME_FINISHED, true);
+        cv.put(TaskContract.TaskEntry.COLUMN_NAME_FINISHED, status ? 1 : 0);
 
         String selection = TaskContract.TaskEntry.COLUMN_NAME_ID + " = ?";
         String[] selectionArgs = { String.valueOf(id) };
