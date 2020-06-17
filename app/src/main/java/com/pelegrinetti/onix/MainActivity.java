@@ -2,16 +2,21 @@ package com.pelegrinetti.onix;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CalendarView;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -34,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
+        getOrSetUsername();
         loadWidgets();
 
         long actualDate = calendar.getDate();
@@ -44,6 +50,62 @@ public class MainActivity extends AppCompatActivity {
         setEvents();
 
         createTaskList();
+    }
+
+    @SuppressLint({"StringFormatInvalid", "SetTextI18n"})
+    public void getOrSetUsername() {
+        final SharedPreferences preferences = getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
+
+        String username = preferences.getString("username", "");
+
+        if (username.equals("")) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            final EditText txtUsername = new EditText(this);
+
+            LinearLayout ln = new LinearLayout(this);
+
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.MATCH_PARENT);
+
+            ln.setLayoutParams(lp);
+            lp.setMargins(25, 25, 25, 25);
+
+            txtUsername.setLayoutParams(lp);
+            txtUsername.setBackground(getDrawable(R.drawable.edittext));
+            txtUsername.setPadding(25, 25, 25, 25);
+
+            ln.addView(txtUsername);
+
+            builder.setTitle("Como quer ser chamado?");
+            builder.setMessage("Informe seu nome...");
+            builder.setView(ln);
+
+            builder.setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    finishAndRemoveTask();
+                }
+            });
+
+            builder.setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    String username = txtUsername.getText().toString();
+                    SharedPreferences.Editor editor = getSharedPreferences("UserPreferences", MODE_PRIVATE).edit();
+                    editor.putString("username", username);
+                    editor.apply();
+
+                    TextView tvUsername = (TextView) findViewById(R.id.username);
+                    tvUsername.setText("Olá, " + username + "!");
+                }
+            });
+
+            builder.show();
+        } else {
+            TextView tvUsername = (TextView) findViewById(R.id.username);
+            tvUsername.setText("Olá, " + username + "!");
+        }
     }
 
     public void loadWidgets() {
