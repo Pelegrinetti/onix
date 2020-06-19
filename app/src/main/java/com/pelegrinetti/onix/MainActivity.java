@@ -38,8 +38,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
-        
+
         loadWidgets();
+
+        checkUsername();
 
         long actualDate = calendar.getDate();
 
@@ -54,6 +56,22 @@ public class MainActivity extends AppCompatActivity {
     public void loadWidgets() {
         createTask = (FloatingActionButton) findViewById(R.id.create_task);
         calendar = (CalendarView) findViewById(R.id.calendar);
+    }
+
+    public void checkUsername() {
+        final SharedPreferences preferences = getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
+
+        String username = preferences.getString("username", "");
+
+        if (username.equals("")) {
+            Intent intent = new Intent(this, RegisterActivity.class);
+
+            startActivityForResult(intent, 0);
+        } else {
+            TextView tvUsername = (TextView) findViewById(R.id.username);
+
+            tvUsername.setText("Olá, " + username + "!");
+        }
     }
 
     public void setEvents() {
