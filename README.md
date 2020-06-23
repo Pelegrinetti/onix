@@ -35,4 +35,10 @@ Acesse o aplicativo e informe seu nome, seleciona uma data e crie uma tarefa!
   <img alt="Excluir tarefa" src="https://github.com/Pelegrinetti/onix/blob/master/static/delete-task.gif" width="250" />
 </div>
 
-# Muito obrigado!
+## Como baixar?
+
+Acesse a aba de `release` do projeto, lá você irá achar todas as versões disponíveis para download.
+
+## Muito obrigado!
+
+Qualquer sugestão ou relato de bug por favor crie uma issue!
