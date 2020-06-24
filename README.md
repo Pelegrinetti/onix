@@ -44,5 +44,5 @@ Acesse a aba de `release` do projeto, lá você irá achar todas as versões dis
 Qualquer sugestão ou relato de bug por favor crie uma issue!
 
 <div align="center">
-  <img alt="Talk is cheap. Show me the App" src="https://github.com/Pelegrinetti/onix/blob/master/static/show-me-the-app.jpg" width="250" />
+  <img alt="Talk is cheap. Show me the App" src="https://github.com/Pelegrinetti/onix/blob/master/static/show-me-the-app.jpg" />
 </div>
